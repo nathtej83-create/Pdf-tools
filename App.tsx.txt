@@ -1,0 +1,54 @@
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import AIAssistant from "@/components/AIAssistant";
+import Home from "./pages/Home";
+import MergePDF from "./pages/MergePDF";
+import SplitPDF from "./pages/SplitPDF";
+import CompressPDF from "./pages/CompressPDF";
+import PDFToWord from "./pages/PDFToWord";
+import PDFToExcel from "./pages/PDFToExcel";
+import PDFToImage from "./pages/PDFToImage";
+import AITools from "./pages/AITools";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
+
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <div className="flex flex-col min-h-screen">
+          <Header />
+          <div className="flex-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/merge-pdf" element={<MergePDF />} />
+              <Route path="/split-pdf" element={<SplitPDF />} />
+              <Route path="/compress-pdf" element={<CompressPDF />} />
+              <Route path="/pdf-to-word" element={<PDFToWord />} />
+              <Route path="/pdf-to-excel" element={<PDFToExcel />} />
+              <Route path="/pdf-to-image" element={<PDFToImage />} />
+              <Route path="/ai-tools" element={<AITools />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+          <Footer />
+          <AIAssistant />
+        </div>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+export default App;
